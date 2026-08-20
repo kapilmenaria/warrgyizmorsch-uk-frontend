@@ -514,10 +514,10 @@ export default function Home() {
           PROCESS
       ========================================================= */}
       <Reveal>
-        <section className="bg-white md:py-10">
-          <div className="mx-auto max-w-6xl px-6">
+        <section className="bg-white py-12 sm:py-16 md:py-20">
+          <div className="mx-auto max-w-6xl px-4 sm:px-6">
             <Reveal>
-              <div className="mb-12 text-center md:mb-16">
+              <div className="mb-8 text-center md:mb-12">
                 <h2 className="text-3xl font-bold text-black md:text-5xl">
                   Our Proven Processes{" "}
                   <span className="ml-2 bg-gradient-to-r from-brand-accent to-cyan-400 bg-clip-text text-transparent">
@@ -525,7 +525,7 @@ export default function Home() {
                   </span>
                 </h2>
 
-                <p className="mx-auto mt-5 max-w-2xl text-16px leading-relaxed text-slate-600 md:text-base">
+                <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-slate-600 md:text-base">
                   A structured approach designed to transform your ideas into
                   scalable, high-performing digital solutions.
                 </p>
@@ -550,7 +550,7 @@ export default function Home() {
       {/* =========================================================
           FAQ — FULL-WIDTH RESPONSIVE LAYOUT
       ========================================================= */}
-      <section className="w-full bg-white px-4 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-24 border-t border-slate-100">
+      <section className="w-full bg-white px-4 py-12 sm:px-6 sm:py-16 lg:px-8 lg:py-20 border-t border-slate-100">
         <div className="mx-auto max-w-7xl">
           <div className="grid gap-10 lg:grid-cols-[0.75fr_1.25fr] lg:gap-16 items-start">
 

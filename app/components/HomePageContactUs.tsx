@@ -20,7 +20,7 @@ export default function HomePageContactUs() {
   };
 
   return (
-    <section className="w-full bg-[#EBF5FB] py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8 xl:px-12">
+    <section className="w-full bg-[#EBF5FB] py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8 xl:px-12">
       <div className="mx-auto max-w-[1400px]">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-8 items-stretch">
           

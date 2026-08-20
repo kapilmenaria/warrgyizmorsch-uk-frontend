@@ -46,9 +46,9 @@ export default function Testimonials() {
   };
 
   return (
-    <section className="py-10">
-      <div className="mx-auto w-full px-4 sm:px-6">
-        <div className="rounded-3xl px-2 sm:px-6 md:px-10 py-10 md:py-16">
+    <section className="py-12 sm:py-16 md:py-20 bg-white">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6">
+        <div>
           <Reveal className="relative mx-auto mb-8 sm:mb-12 text-center">
             <div>
               <h2 className="text-3xl font-bold text-black md:text-5xl">

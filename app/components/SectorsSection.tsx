@@ -127,6 +127,33 @@ export default function SectorsSection() {
     }
   };
 
+  /* ------------------------------------------------------
+     TOUCH SWIPE SUPPORT (SMARTPHONE)
+  ------------------------------------------------------ */
+  const touchStartX = useRef<number | null>(null);
+  const touchStartY = useRef<number | null>(null);
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+    touchStartY.current = e.touches[0].clientY;
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartX.current === null || touchStartY.current === null) return;
+    const diffX = touchStartX.current - e.changedTouches[0].clientX;
+    const diffY = touchStartY.current - e.changedTouches[0].clientY;
+
+    if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 40) {
+      if (diffX > 0 && activeIndex < sectors.length - 1) {
+        select(activeIndex + 1);
+      } else if (diffX < 0 && activeIndex > 0) {
+        select(activeIndex - 1);
+      }
+    }
+    touchStartX.current = null;
+    touchStartY.current = null;
+  };
+
   useEffect(() => {
     const node = sectionRef.current;
     if (!node || typeof IntersectionObserver === "undefined") return;
@@ -177,7 +204,9 @@ export default function SectorsSection() {
   return (
     <section
       ref={sectionRef}
-      className="bg-white px-4 py-6 sm:px-8 sm:py-12 lg:min-h-[100svh] lg:px-12 lg:pt-24 lg:pb-12 xl:px-16 xl:pt-28 xl:pb-14 flex items-center overflow-hidden"
+      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
+      className="bg-white px-4 py-6 sm:px-8 sm:py-10 lg:min-h-[100svh] lg:px-12 lg:pt-24 lg:pb-12 xl:px-16 xl:pt-28 xl:pb-14 flex items-center overflow-hidden touch-pan-y"
     >
       <div className="mx-auto flex max-w-7xl flex-col justify-center gap-4 lg:gap-6 w-full">
         

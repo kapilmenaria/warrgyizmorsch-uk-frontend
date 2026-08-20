@@ -46,15 +46,15 @@ const projects: Project[] = [
 
 export default function OurWork() {
   return (
-    <section className="mt-16 overflow-hidden bg-[#050505] py-20 text-white md:py-24">
-      <div className="mx-auto max-w-7xl px-6">
+    <section className="overflow-hidden bg-[#050505] py-12 sm:py-16 md:py-20 text-white">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6">
         {/* =====================================================
             SECTION HEADER
         ====================================================== */}
 
-        <div className="mb-10">
+        <div className="mb-8 md:mb-10">
           {/* Eyebrow */}
-          <p className="mb-3 text-xs font-bold uppercase tracking-[0.35em] text-brand-accent">
+          <p className="mb-2 text-xs font-bold uppercase tracking-[0.35em] text-brand-accent">
             Portfolio
           </p>
 
@@ -62,9 +62,8 @@ export default function OurWork() {
           <h2 className="text-3xl font-bold leading-tight tracking-tight text-white md:text-5xl">
             Our Outstanding Latest{" "}
             <span className="bg-gradient-to-r from-brand-accent to-cyan-400 bg-clip-text text-transparent">
-              Projects & Works
+              Projects &amp; Works
             </span>
-            
           </h2>
         </div>
 
