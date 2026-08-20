@@ -1,0 +1,771 @@
+@import "tailwindcss";
+
+/*
+  ============================================
+  BRAND COLORS — all-blue palette.
+  Change these variables only to update
+  accent colors sitewide.
+  ============================================
+*/
+:root {
+  --color-brand-navy: #0f4ea1;
+  --color-brand-navy-2: #0b63d6;
+  --color-brand-accent: #006fc9;
+  --color-brand-accent-dark: #055a9f;
+  --color-brand-accent-light: #eaf3fe;
+  --color-brand-primary: var(--color-brand-accent);
+}
+
+@theme inline {
+  --color-brand-navy: var(--color-brand-navy);
+  --color-brand-navy-2: var(--color-brand-navy-2);
+  --color-brand-accent: var(--color-brand-accent);
+  --color-brand-accent-dark: var(--color-brand-accent-dark);
+  --color-brand-accent-light: var(--color-brand-accent-light);
+  --color-brand-primary: var(--color-brand-accent);
+  --font-sans: var(--font-sans), system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-mono: var(--font-sans), system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-family: var(--font-sans), system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+span,
+a,
+button,
+input,
+textarea,
+select,
+label,
+li,
+div {
+  font-family: var(--font-sans), system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+body {
+  color: var(--color-brand-navy);
+}
+
+/* ============ ANIMATIONS ============ */
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes drift {
+
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+
+  50% {
+    transform: translate(12px, -14px);
+  }
+}
+
+@keyframes pulse-glow {
+
+  0%,
+  100% {
+    opacity: 0.35;
+  }
+
+  50% {
+    opacity: 0.6;
+  }
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.7s ease-out both;
+}
+
+.animate-fade-in {
+  animation: fade-in 0.9s ease-out both;
+}
+
+.animate-drift {
+  animation: drift 7s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 4s ease-in-out infinite;
+}
+
+.delay-1 {
+  animation-delay: 0.1s;
+}
+
+.delay-2 {
+  animation-delay: 0.25s;
+}
+
+.delay-3 {
+  animation-delay: 0.4s;
+}
+
+/* =========================================================
+   HERO ENTRANCE
+========================================================= */
+
+@keyframes hero-light-sweep {
+  0% {
+    transform: translateX(-20%) skewX(-18deg);
+    opacity: 0;
+  }
+
+  20% {
+    opacity: 0.65;
+  }
+
+  70%,
+  100% {
+    transform: translateX(320%) skewX(-18deg);
+    opacity: 0;
+  }
+}
+
+@keyframes hero-content-enter {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 22px, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes hero-cta-pulse {
+
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(9, 100, 218, 0);
+  }
+
+  50% {
+    box-shadow: 0 0 0 9px rgba(9, 100, 218, 0.16);
+  }
+}
+
+.hero-light-sweep {
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.12), transparent);
+  animation: hero-light-sweep 1.8s cubic-bezier(0.22, 1, 0.36, 1) 0.15s both;
+}
+
+.hero-eyebrow-enter,
+.hero-heading-enter,
+.hero-copy-enter,
+.hero-actions-enter {
+  animation: hero-content-enter 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.hero-eyebrow-enter {
+  animation-delay: 0.2s;
+}
+
+.hero-heading-enter {
+  animation-delay: 0.34s;
+}
+
+.hero-copy-enter {
+  animation-delay: 0.48s;
+}
+
+.hero-actions-enter {
+  animation-delay: 0.62s;
+}
+
+.hero-primary-cta {
+  animation: hero-cta-pulse 2.6s ease-in-out 1.65s infinite;
+}
+
+.hero-primary-cta:hover {
+  animation-play-state: paused;
+}
+
+/* Scroll-reveal: JS toggles data-visible, CSS handles the transition */
+/* =========================================================
+   SCROLL REVEAL
+========================================================= */
+
+[data-reveal="false"] {
+  opacity: 0;
+  transform: translate3d(0, 28px, 0) scale(0.985);
+  transition:
+    opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+[data-reveal="true"] {
+  opacity: 1;
+  transform: translate3d(0, 0, 0) scale(1);
+  transition:
+    opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Staggered reveals */
+
+[data-reveal="true"].delay-1 {
+  transition-delay: 0.08s;
+}
+
+[data-reveal="true"].delay-2 {
+  transition-delay: 0.16s;
+}
+
+[data-reveal="true"].delay-3 {
+  transition-delay: 0.24s;
+}
+
+[data-reveal="true"].delay-4 {
+  transition-delay: 0.32s;
+}
+
+[data-reveal="true"].delay-5 {
+  transition-delay: 0.4s;
+}
+
+[data-reveal="true"].delay-6 {
+  transition-delay: 0.48s;
+}
+
+/* Reduced motion */
+
+@media (prefers-reduced-motion: reduce) {
+
+  [data-reveal="false"],
+  [data-reveal="true"] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .hero-light-sweep,
+  .hero-eyebrow-enter,
+  .hero-heading-enter,
+  .hero-copy-enter,
+  .hero-actions-enter,
+  .hero-primary-cta {
+    animation: none;
+  }
+}
+
+@keyframes services-pop {
+  0% {
+    opacity: 0;
+    transform: translateY(14px) scale(0.97);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes feature-pop {
+  0% {
+    opacity: 0;
+    transform: translateY(18px) scale(0.94);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes services-icon {
+  0% {
+    opacity: 0;
+    transform: scale(0.75) rotate(-8deg);
+  }
+
+  70% {
+    transform: scale(1.08) rotate(2deg);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(0);
+  }
+}
+
+.animate-services-pop {
+  animation: services-pop 420ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.animate-feature-pop {
+  animation: feature-pop 450ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.animate-services-icon {
+  animation: services-icon 500ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+
+/* =========================================================
+   ABOUT US — TECHNOLOGY MARQUEE
+========================================================= */
+
+
+.tech-marquee {
+  width: 100%;
+  overflow: hidden;
+}
+
+.tech-track {
+  display: flex;
+  width: max-content;
+  gap: 24px;
+  animation: tech-marquee 26s linear infinite;
+}
+
+.tech-track:hover {
+  animation-play-state: paused;
+}
+
+@keyframes tech-marquee {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(calc(-50% - 12px));
+  }
+}
+
+/* =========================================================
+   ACCESSIBILITY
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .tech-track {
+    animation: none;
+  }
+
+  .tech-track:hover {
+    animation: none;
+  }
+}
+
+@keyframes dropdownIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes panelIn {
+  from {
+    opacity: 0;
+    transform: translateX(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.animate-dropdown {
+  animation: dropdownIn 0.22s ease-out forwards;
+}
+
+.animate-panel {
+  animation: panelIn 0.18s ease-out forwards;
+}
+
+/* =========================================================
+   LOGO SLIDER
+========================================================= */
+
+.logo-slider {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Fade edges */
+.logo-slider::before,
+.logo-slider::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 80px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.logo-slider::before {
+  left: 0;
+  background: linear-gradient(to right,
+      white 0%,
+      rgba(255, 255, 255, 0) 100%);
+}
+
+.logo-slider::after {
+  right: 0;
+  background: linear-gradient(to left,
+      white 0%,
+      rgba(255, 255, 255, 0) 100%);
+}
+
+/* =========================================================
+   TRACK
+========================================================= */
+
+.logo-track {
+  display: flex;
+  width: max-content;
+  align-items: center;
+  animation: logo-scroll 38s linear infinite;
+  will-change: transform;
+}
+
+.logo-slider:hover .logo-track {
+  animation-play-state: paused;
+}
+
+
+/* =========================================================
+   LOGO GROUP
+========================================================= */
+
+.logo-group {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+}
+
+/* =========================================================
+   INDIVIDUAL LOGO
+========================================================= */
+
+.logo-item {
+  position: relative;
+
+  width: 210px;
+  min-width: 210px;
+  height: 96px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0 16px;
+
+  transition:
+    opacity 0.4s ease,
+    transform 0.4s ease;
+}
+
+/* Make the slider pause when interacting */
+.logo-slider:has(.logo-item:hover) .logo-track {
+  animation-play-state: paused;
+}
+
+/* Slightly fade only logos other than the one being hovered. */
+.logo-slider:has(.logo-item:hover) .logo-item:not(:hover) {
+  opacity: 0.45;
+}
+
+/* Keep the hovered logo crisp and above its neighbours. */
+.logo-slider .logo-item:hover {
+  opacity: 1;
+  filter: none;
+  z-index: 20;
+}
+
+/* =========================================================
+   SEAMLESS LOOP
+========================================================= */
+@keyframes logo-scroll {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+
+  to {
+    transform: translate3d(-33.3333%, 0, 0);
+  }
+}
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 1024px) {
+  .logo-item {
+    width: 175px;
+    min-width: 175px;
+  }
+}
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 768px) {
+  .logo-track {
+    animation-duration: 14s;
+  }
+
+  .logo-item {
+    width: 150px;
+    min-width: 150px;
+    height: 70px;
+    padding: 0 12px;
+  }
+
+  .logo-slider::before,
+  .logo-slider::after {
+    width: 45px;
+  }
+}
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 480px) {
+  .logo-track {
+    animation-duration: 12s;
+  }
+
+  .logo-item {
+    width: 135px;
+    min-width: 135px;
+    padding: 0 10px;
+  }
+
+  .logo-slider::before,
+  .logo-slider::after {
+    width: 30px;
+  }
+}
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .logo-track {
+    animation: none;
+  }
+}
+
+/* =========================================
+   SECTORS SLIDER
+========================================= */
+
+/* =========================================================
+   SECTORS SLIDER
+========================================================= */
+
+.sectors-swiper {
+  width: 100%;
+  overflow: visible !important;
+  padding: 30px 0 35px;
+}
+
+.sectors-swiper .swiper-wrapper {
+  align-items: center;
+}
+
+.sectors-swiper .swiper-slide {
+  height: auto;
+  transition:
+    opacity 0.7s ease,
+    filter 0.7s ease,
+    transform 0.7s ease;
+}
+
+/* =========================================================
+   SIDE CARDS
+   Small + blurred like reference
+========================================================= */
+
+.sectors-swiper .swiper-slide:not(.swiper-slide-active) {
+  opacity: 0.48;
+  filter: blur(2px);
+  transform: scale(0.78);
+}
+
+/* =========================================================
+   CENTER CARD
+========================================================= */
+
+.sectors-swiper .swiper-slide-active {
+  position: relative;
+  z-index: 10;
+  opacity: 1;
+  filter: blur(0);
+  transform: scale(1);
+}
+
+.sector-card {
+  width: 100%;
+  min-height: 540px;
+  box-shadow: 0 15px 45px rgba(11, 31, 58, 0.10);
+  transition: box-shadow 0.5s ease;
+}
+
+.sectors-swiper .swiper-slide-active .sector-card {
+  box-shadow: 0 24px 65px rgba(11, 31, 58, 0.16);
+}
+
+/* =========================================================
+   PAGINATION
+========================================================= */
+
+.sectors-pagination .swiper-pagination-bullet {
+  width: 8px;
+  height: 8px;
+  margin: 0 5px !important;
+  border-radius: 999px;
+  background: #cbd5e1;
+  opacity: 1;
+  transition:
+    width 0.3s ease,
+    background 0.3s ease;
+}
+
+.sectors-pagination .swiper-pagination-bullet-active {
+  width: 24px;
+  background: var(--color-brand-accent, #0964da);
+}
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 1023px) {
+  .sectors-swiper {
+    padding-top: 24px;
+  }
+
+  .sectors-swiper .swiper-slide:not(.swiper-slide-active) {
+    opacity: 0.38;
+    filter: blur(1.5px);
+    transform: scale(0.82);
+  }
+
+  .sector-card {
+    min-height: 500px;
+  }
+}
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 639px) {
+  .sectors-swiper {
+    padding: 20px 0 30px;
+  }
+
+  .sectors-swiper .swiper-slide:not(.swiper-slide-active) {
+    opacity: 0.25;
+    filter: blur(1px);
+    transform: scale(0.88);
+  }
+
+  .sector-card {
+    min-height: 0;
+  }
+
+  .sectors-prev {
+    left: 4px;
+  }
+
+  .sectors-next {
+    right: 4px;
+  }
+}
+
+/* =========================================================
+   ANIMATED HERO
+========================================================= */
+
+/* Pinned, viewport-centred sectors experience. */
+#sectors-stage header>div>p {
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  #sectors-stage>section {
+    position: sticky;
+    top: 0;
+    padding-top: clamp(4.5rem, 7vh, 5.5rem);
+  }
+
+  #sectors-stage .grid.flex-1.items-center {
+    align-items: center;
+    padding-top: clamp(2rem, 4vh, 3.5rem);
+    padding-bottom: clamp(2rem, 4vh, 3.5rem);
+  }
+
+  #sectors-stage h3 {
+    font-family: inherit;
+    font-weight: 700;
+    letter-spacing: -0.045em;
+  }
+
+  #services-stage>#services {
+    position: sticky;
+    top: 0;
+    height: 100svh;
+    min-height: 0;
+    padding-top: clamp(5rem, 8vh, 6.5rem);
+    padding-bottom: 1.5rem;
+  }
+
+  #services-tabs {
+    align-items: center;
+  }
+
+  #services-tabs>div:first-child {
+    min-height: 0;
+  }
+
+  #services-tabs>div:last-child>div {
+    height: clamp(26rem, 55svh, 34rem);
+  }
+}
