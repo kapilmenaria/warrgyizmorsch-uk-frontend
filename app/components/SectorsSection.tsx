@@ -244,7 +244,7 @@ export default function SectorsSection() {
         <div className="flex flex-col lg:grid items-center gap-3 sm:gap-8 py-1 lg:py-2 lg:grid-cols-[0.9fr_1.1fr] lg:gap-12 xl:gap-16">
           
           {/* 3D CANVAS (MOBILE: TOP / DESKTOP: RIGHT) */}
-          <div className="order-1 lg:order-2 relative flex items-center justify-center w-full h-[200px] sm:h-[300px] lg:h-[520px] xl:h-[560px]">
+          <div className="order-1 lg:order-2 relative flex items-center justify-center w-full h-[220px] sm:h-[300px] lg:h-[520px] xl:h-[560px]">
             {/* Subtle Ambient Radial Glow */}
             <div
               className="pointer-events-none absolute h-[200px] w-[200px] sm:h-[320px] sm:w-[320px] rounded-full blur-[80px] sm:blur-[110px] opacity-25 transition-all duration-700 ease-out"
@@ -256,10 +256,10 @@ export default function SectorsSection() {
               <SectorCanvas scene={active.scene} accent={active.accent} active={isSectionActive} />
             </div>
 
-            {/* Floating Tag at Bottom */}
+            {/* Floating Tag at Bottom (Desktop Only - Avoids covering 3D model on mobile) */}
             <div
               key={active.scene}
-              className="pointer-events-none absolute bottom-1 left-1/2 -translate-x-1/2 inline-flex items-center gap-1.5 rounded-full border border-slate-200/90 bg-white/90 px-3 py-0.5 text-[11px] sm:text-xs font-semibold text-[#27364A] shadow-xs backdrop-blur-xs animate-[fade-in-up_400ms_ease-out_both]"
+              className="pointer-events-none absolute bottom-2 left-1/2 -translate-x-1/2 hidden lg:inline-flex items-center gap-1.5 rounded-full border border-slate-200/90 bg-white/90 px-3.5 py-1 text-xs font-semibold text-[#27364A] shadow-xs backdrop-blur-xs animate-[fade-in-up_400ms_ease-out_both]"
             >
               <span className="h-1.5 w-1.5 rounded-full" style={{ backgroundColor: active.accent }} />
               <span>{active.tag}</span>

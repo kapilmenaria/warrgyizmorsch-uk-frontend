@@ -3,7 +3,7 @@
 import Link from "next/link";
 import dynamic from "next/dynamic";
 import { useEffect, useRef, useState } from "react";
-import { ChevronRight, ChevronLeft } from "lucide-react";
+import { ChevronRight, ArrowLeft, ArrowRight } from "lucide-react";
 
 /* three.js is client-only and heavy — load it on demand */
 const SceneCanvas = dynamic(() => import("./services/SceneCanvas"), {
@@ -128,16 +128,23 @@ export default function ServicesTabs() {
     setActiveIndex(next);
   };
 
+  const tabsContainerRef = useRef<HTMLDivElement>(null);
+
   /* ------------------------------------------------------
-     AUTO-SCROLL ACTIVE MOBILE TAB INTO VIEW
+     AUTO-SCROLL ACTIVE MOBILE TAB (LOCAL CONTAINER ONLY)
   ------------------------------------------------------ */
   useEffect(() => {
-    if (window.innerWidth < 1024) {
-      tabButtonsRef.current[activeIndex]?.scrollIntoView({
-        behavior: "smooth",
-        block: "nearest",
-        inline: "center",
-      });
+    if (typeof window !== "undefined" && window.innerWidth < 1024) {
+      const container = tabsContainerRef.current;
+      const button = tabButtonsRef.current[activeIndex];
+      if (container && button) {
+        const targetScrollLeft =
+          button.offsetLeft - container.offsetWidth / 2 + button.offsetWidth / 2;
+        container.scrollTo({
+          left: Math.max(0, targetScrollLeft),
+          behavior: "smooth",
+        });
+      }
     }
   }, [activeIndex]);
 
@@ -242,8 +249,8 @@ export default function ServicesTabs() {
             "
           />
 
-          {/* Counter */}
-          <div className="absolute right-2 top-2 z-20 text-right sm:right-3 sm:top-3">
+          {/* Counter (Desktop Only) */}
+          <div className="absolute right-2 top-2 z-20 text-right sm:right-3 sm:top-3 hidden lg:block">
             <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/60">
               {String(activeIndex + 1).padStart(2, "0")} / 06
             </span>
@@ -270,44 +277,55 @@ export default function ServicesTabs() {
           "
         />
 
-        {/* Mobile Navigation Controls & Arrows */}
-        <div className="flex items-center justify-between gap-3 pb-2.5 lg:hidden">
-          <div className="flex items-center gap-2">
-            <span className="text-xs font-mono font-bold tracking-wider text-[#60C7FF]">
-              {String(activeIndex + 1).padStart(2, "0")} / {String(categories.length).padStart(2, "0")}
-            </span>
-            <span className="text-xs font-medium text-slate-400">
-              Swipe or tap tabs
+        {/* Mobile Navigation Controls & Indicator Bar (Matches Sectors Section) */}
+        <div className="flex items-center justify-between gap-3 pb-3 lg:hidden">
+          <div className="flex items-center gap-2 sm:gap-3">
+            <button
+              onClick={() => selectCategory(activeIndex - 1)}
+              disabled={activeIndex === 0}
+              aria-label="Previous service"
+              type="button"
+              className="grid h-8 w-8 sm:h-9 sm:w-9 place-items-center rounded-xl border border-white/15 bg-white/10 text-white shadow-xs hover:border-white/30 hover:bg-white/15 disabled:opacity-25 disabled:cursor-not-allowed cursor-pointer transition-all active:scale-95"
+            >
+              <ArrowLeft className="h-4 w-4" />
+            </button>
+
+            <button
+              onClick={() => selectCategory(activeIndex + 1)}
+              disabled={activeIndex === categories.length - 1}
+              aria-label="Next service"
+              type="button"
+              className="grid h-8 w-8 sm:h-9 sm:w-9 place-items-center rounded-xl border border-white/15 bg-white/10 text-white shadow-xs hover:border-white/30 hover:bg-white/15 disabled:opacity-25 disabled:cursor-not-allowed cursor-pointer transition-all active:scale-95"
+            >
+              <ArrowRight className="h-4 w-4" />
+            </button>
+
+            <span className="ml-1 sm:ml-2 text-[10px] sm:text-xs font-medium uppercase tracking-wider text-slate-300">
+              Swipe or tap arrows
             </span>
           </div>
 
-          <div className="flex items-center gap-1.5">
-            <button
-              type="button"
-              onClick={() => selectCategory(activeIndex - 1)}
-              disabled={activeIndex === 0}
-              aria-label="Previous Service"
-              className="flex h-8 w-8 items-center justify-center rounded-full border border-white/15 bg-white/10 text-white shadow-xs transition-all active:scale-95 disabled:opacity-25 disabled:cursor-not-allowed hover:bg-white/20 cursor-pointer"
-            >
-              <ChevronLeft size={16} />
-            </button>
-
-            <button
-              type="button"
-              onClick={() => selectCategory(activeIndex + 1)}
-              disabled={activeIndex === categories.length - 1}
-              aria-label="Next Service"
-              className="flex h-8 w-8 items-center justify-center rounded-full border border-white/15 bg-white/10 text-white shadow-xs transition-all active:scale-95 disabled:opacity-25 disabled:cursor-not-allowed hover:bg-white/20 cursor-pointer"
-            >
-              <ChevronRight size={16} />
-            </button>
+          {/* Mobile Dotted Indicator (Right aligned) */}
+          <div className="flex lg:hidden gap-1.5 items-center">
+            {categories.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => selectCategory(i)}
+                className={`h-1.5 rounded-full transition-all duration-300 cursor-pointer ${
+                  i === activeIndex ? "w-5 bg-[#60C7FF]" : "w-1.5 bg-white/30"
+                }`}
+                aria-label={`Go to service ${i + 1}`}
+              />
+            ))}
           </div>
         </div>
 
         {/* Tab Buttons Row (Mobile: Horizontal Scroll Pills / Desktop: Vertical Stack) */}
         <div
+          ref={tabsContainerRef}
           className="
-            no-scrollbar flex gap-2 overflow-x-auto pb-2 scroll-smooth
+            flex gap-2 overflow-x-auto pb-1 scroll-smooth w-full max-w-full
+            [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden
             lg:flex-col lg:gap-7 lg:overflow-visible lg:pb-0
           "
         >
