@@ -154,9 +154,9 @@ function LogoGroup() {
 
 export default function LogoSlider() {
   return (
-    <section className="w-full py-4 sm:py-8 md:py-12 overflow-hidden">
+    <section className="w-full py-3 sm:py-5 md:py-6 overflow-hidden">
       <div className="w-full">
-        <div className="overflow-hidden py-2 sm:py-4 lg:py-6">
+        <div className="overflow-hidden py-1 sm:py-2">
           <div className="logo-slider">
             <div className="logo-track">
               <LogoGroup />

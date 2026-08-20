@@ -14,7 +14,7 @@ export default function Footer() {
             {/* LOGO */}
             <Link href="/" className="inline-block">
               <img
-                src="/images/logo.png"
+                src="/images/WARR LOGO WHITE.webp"
                 alt="Warrgyizmorsch Logo"
                 className="
                 h-10 w-auto

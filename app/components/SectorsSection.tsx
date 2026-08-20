@@ -206,9 +206,9 @@ export default function SectorsSection() {
       ref={sectionRef}
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
-      className="bg-white px-4 py-6 sm:px-8 sm:py-10 lg:min-h-[100svh] lg:px-12 lg:pt-24 lg:pb-12 xl:px-16 xl:pt-28 xl:pb-14 flex items-center overflow-hidden touch-pan-y"
+      className="bg-white px-4 py-4 sm:px-8 sm:py-8 lg:min-h-[100svh] lg:px-12 lg:pt-20 lg:pb-8 xl:px-16 xl:pt-24 xl:pb-10 flex flex-col justify-center overflow-hidden touch-pan-y"
     >
-      <div className="mx-auto flex max-w-7xl flex-col justify-center gap-4 lg:gap-6 w-full">
+      <div className="mx-auto flex max-w-7xl flex-col justify-center gap-3 lg:gap-5 w-full">
         
         {/* =========================================================
             HEADER & PROGRESS
