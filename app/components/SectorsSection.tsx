@@ -177,19 +177,19 @@ export default function SectorsSection() {
   return (
     <section
       ref={sectionRef}
-      className="min-h-[720px] bg-white px-5 py-14 sm:px-8 lg:h-[100svh] lg:min-h-0 lg:px-12 lg:py-10 xl:px-16 flex items-center overflow-hidden"
+      className="bg-white px-4 py-6 sm:px-8 sm:py-12 lg:min-h-[100svh] lg:px-12 lg:pt-24 lg:pb-12 xl:px-16 xl:pt-28 xl:pb-14 flex items-center overflow-hidden"
     >
-      <div className="mx-auto flex min-h-[calc(100svh-5rem)] max-w-7xl flex-col justify-between w-full lg:h-full lg:min-h-0">
+      <div className="mx-auto flex max-w-7xl flex-col justify-center gap-4 lg:gap-6 w-full">
         
         {/* =========================================================
             HEADER & PROGRESS
         ========================================================== */}
-        <header className="flex items-end gap-5 sm:gap-8">
+        <header className="flex items-end gap-4 sm:gap-8">
           <div>
-            <p className="mb-1 text-[10px] font-bold uppercase tracking-[.18em] text-brand-accent sm:text-xs">
+            <p className="mb-0.5 sm:mb-1 text-[10px] font-bold uppercase tracking-[.18em] text-brand-accent sm:text-xs">
               Explore our expertise
             </p>
-            <h2 className="text-3xl font-bold text-black md:text-5xl">
+            <h2 className="text-2xl font-bold text-black sm:text-4xl md:text-5xl">
               Sectors We{" "}
               <span className="bg-gradient-to-r from-brand-accent to-cyan-400 bg-clip-text text-transparent">
                 Serve
@@ -210,36 +210,59 @@ export default function SectorsSection() {
         </header>
 
         {/* =========================================================
-            SEAMLESS 2-COLUMN LAYOUT (SAME CONTAINER, NO DARK BOX)
+            SEAMLESS 2-COLUMN LAYOUT (MOBILE: 3D TOP / DESKTOP: SIDE-BY-SIDE)
         ========================================================== */}
-        <div className="grid flex-1 items-center gap-8 py-6 lg:grid-cols-[0.9fr_1.1fr] lg:gap-12 xl:gap-16">
+        <div className="flex flex-col lg:grid items-center gap-3 sm:gap-8 py-1 lg:py-2 lg:grid-cols-[0.9fr_1.1fr] lg:gap-12 xl:gap-16">
           
-          {/* LEFT: Sector Details */}
-          <div className="flex flex-col justify-center max-w-xl">
+          {/* 3D CANVAS (MOBILE: TOP / DESKTOP: RIGHT) */}
+          <div className="order-1 lg:order-2 relative flex items-center justify-center w-full h-[200px] sm:h-[300px] lg:h-[520px] xl:h-[560px]">
+            {/* Subtle Ambient Radial Glow */}
+            <div
+              className="pointer-events-none absolute h-[200px] w-[200px] sm:h-[320px] sm:w-[320px] rounded-full blur-[80px] sm:blur-[110px] opacity-25 transition-all duration-700 ease-out"
+              style={{ backgroundColor: active.accent }}
+            />
+
+            {/* Transparent 3D Canvas */}
+            <div className="absolute inset-0">
+              <SectorCanvas scene={active.scene} accent={active.accent} active={isSectionActive} />
+            </div>
+
+            {/* Floating Tag at Bottom */}
+            <div
+              key={active.scene}
+              className="pointer-events-none absolute bottom-1 left-1/2 -translate-x-1/2 inline-flex items-center gap-1.5 rounded-full border border-slate-200/90 bg-white/90 px-3 py-0.5 text-[11px] sm:text-xs font-semibold text-[#27364A] shadow-xs backdrop-blur-xs animate-[fade-in-up_400ms_ease-out_both]"
+            >
+              <span className="h-1.5 w-1.5 rounded-full" style={{ backgroundColor: active.accent }} />
+              <span>{active.tag}</span>
+            </div>
+          </div>
+
+          {/* SECTOR DETAILS (MOBILE: BOTTOM / DESKTOP: LEFT) */}
+          <div className="order-2 lg:order-1 flex flex-col justify-center max-w-xl w-full">
             <div
               key={active.title}
               className="animate-[fade-in-up_450ms_ease-out_both]"
             >
               {/* Category Eyebrow Badge */}
-              <div className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-slate-50 px-3.5 py-1.5 shadow-2xs">
-                <IconComponent className="h-4 w-4" style={{ color: active.accent }} />
-                <span className="text-xs font-bold uppercase tracking-[0.16em]" style={{ color: active.accent }}>
+              <div className="inline-flex items-center gap-1.5 rounded-full border border-slate-200 bg-slate-50 px-2.5 py-0.5 shadow-2xs">
+                <IconComponent className="h-3 w-3" style={{ color: active.accent }} />
+                <span className="text-[10px] sm:text-xs font-bold uppercase tracking-[0.16em]" style={{ color: active.accent }}>
                   {active.eyebrow}
                 </span>
               </div>
 
               {/* Sector Title */}
-              <h3 className="mt-4 text-4xl font-bold leading-[1.02] tracking-tight text-[#0B1F3A] sm:text-5xl lg:text-6xl xl:text-[68px]">
+              <h3 className="mt-1.5 sm:mt-4 text-xl sm:text-4xl font-bold leading-[1.08] tracking-tight text-[#0B1F3A] lg:text-6xl xl:text-[68px]">
                 {active.title}
               </h3>
 
               {/* Description */}
-              <p className="mt-5 max-w-lg text-base leading-7 text-[#4A5B73] sm:text-lg sm:leading-8">
+              <p className="mt-1.5 sm:mt-5 max-w-lg text-xs sm:text-base leading-5 sm:leading-7 text-[#4A5B73] lg:text-lg lg:leading-8">
                 {active.description}
               </p>
 
-              {/* Key Features Pill Matrix */}
-              <div className="mt-6 flex flex-wrap gap-2">
+              {/* Key Features Pill Matrix (Desktop Only) */}
+              <div className="hidden lg:flex mt-6 flex-wrap gap-2">
                 {active.features.map((feat) => (
                   <span
                     key={feat}
@@ -251,8 +274,8 @@ export default function SectorsSection() {
                 ))}
               </div>
 
-              {/* Stat Highlight */}
-              <div className="mt-6 flex items-center gap-6 rounded-2xl border border-slate-200 bg-slate-50/70 p-4 shadow-2xs">
+              {/* Stat Highlight (Desktop Only) */}
+              <div className="hidden lg:flex mt-6 items-center gap-6 rounded-2xl border border-slate-200 bg-slate-50/70 p-4 shadow-2xs">
                 <div>
                   <div className="text-2xl font-bold font-mono tracking-tight" style={{ color: active.accent }}>
                     {active.stat.value}
@@ -270,14 +293,14 @@ export default function SectorsSection() {
             </div>
 
             {/* Navigation & Controls */}
-            <div className="mt-8 flex items-center justify-between">
-              <div className="flex items-center gap-3">
+            <div className="mt-3 sm:mt-8 flex items-center justify-between">
+              <div className="flex items-center gap-2 sm:gap-3">
                 <button
                   onClick={() => select(activeIndex - 1)}
                   disabled={!activeIndex}
                   aria-label="Previous sector"
                   type="button"
-                  className="grid h-11 w-11 place-items-center rounded-xl border border-slate-200 bg-white text-slate-700 shadow-xs hover:border-slate-300 hover:bg-slate-50 disabled:opacity-30 disabled:hover:bg-white cursor-pointer transition-all active:scale-95"
+                  className="grid h-8 w-8 sm:h-11 sm:w-11 place-items-center rounded-xl border border-slate-200 bg-white text-slate-700 shadow-xs hover:border-slate-300 hover:bg-slate-50 disabled:opacity-30 disabled:hover:bg-white cursor-pointer transition-all active:scale-95"
                 >
                   <ArrowLeft className="h-4 w-4" />
                 </button>
@@ -287,13 +310,13 @@ export default function SectorsSection() {
                   disabled={activeIndex === sectors.length - 1}
                   aria-label="Next sector"
                   type="button"
-                  className="grid h-11 w-11 place-items-center rounded-xl border border-slate-200 bg-white text-slate-700 shadow-xs hover:border-slate-300 hover:bg-slate-50 disabled:opacity-30 disabled:hover:bg-white cursor-pointer transition-all active:scale-95"
+                  className="grid h-8 w-8 sm:h-11 sm:w-11 place-items-center rounded-xl border border-slate-200 bg-white text-slate-700 shadow-xs hover:border-slate-300 hover:bg-slate-50 disabled:opacity-30 disabled:hover:bg-white cursor-pointer transition-all active:scale-95"
                 >
                   <ArrowRight className="h-4 w-4" />
                 </button>
 
-                <span className="ml-2 text-xs font-medium uppercase tracking-wider text-slate-400">
-                  Scroll or click to explore
+                <span className="ml-1 sm:ml-2 text-[10px] sm:text-xs font-medium uppercase tracking-wider text-slate-400">
+                  Swipe or tap arrows
                 </span>
               </div>
 
@@ -303,36 +326,13 @@ export default function SectorsSection() {
                   <button
                     key={i}
                     onClick={() => select(i)}
-                    className={`h-2 rounded-full transition-all duration-300 ${
-                      i === activeIndex ? "w-6 bg-brand-accent" : "w-2 bg-slate-300"
+                    className={`h-1.5 rounded-full transition-all duration-300 ${
+                      i === activeIndex ? "w-5 bg-brand-accent" : "w-1.5 bg-slate-300"
                     }`}
                     aria-label={`Go to sector ${i + 1}`}
                   />
                 ))}
               </div>
-            </div>
-          </div>
-
-          {/* RIGHT: Transparent Interactive 3D Canvas in Same Visual Space */}
-          <div className="relative flex items-center justify-center w-full h-[360px] sm:h-[440px] lg:h-[520px] xl:h-[560px]">
-            {/* Subtle Ambient Radial Glow */}
-            <div
-              className="pointer-events-none absolute h-[320px] w-[320px] rounded-full blur-[110px] opacity-25 transition-all duration-700 ease-out"
-              style={{ backgroundColor: active.accent }}
-            />
-
-            {/* Transparent 3D Canvas */}
-            <div className="absolute inset-0">
-              <SectorCanvas scene={active.scene} accent={active.accent} active={isSectionActive} />
-            </div>
-
-            {/* Floating Tag at Bottom */}
-            <div
-              key={active.scene}
-              className="pointer-events-none absolute bottom-2 left-1/2 -translate-x-1/2 inline-flex items-center gap-2 rounded-full border border-slate-200/90 bg-white/90 px-4 py-1.5 text-xs font-semibold text-[#27364A] shadow-xs backdrop-blur-xs animate-[fade-in-up_400ms_ease-out_both]"
-            >
-              <span className="h-1.5 w-1.5 rounded-full" style={{ backgroundColor: active.accent }} />
-              <span>{active.tag}</span>
             </div>
           </div>
 

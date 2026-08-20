@@ -482,15 +482,16 @@ body {
 .logo-item {
   position: relative;
 
-  width: 210px;
-  min-width: 210px;
-  height: 96px;
+  width: 240px;
+  min-width: 240px;
+  height: 100px;
 
   display: flex;
   align-items: center;
   justify-content: center;
 
-  padding: 0 16px;
+  padding: 0 18px;
+  flex-shrink: 0;
 
   transition:
     opacity 0.4s ease,
@@ -518,12 +519,12 @@ body {
    SEAMLESS LOOP
 ========================================================= */
 @keyframes logo-scroll {
-  from {
-    transform: translate3d(0, 0, 0);
+  0% {
+    transform: translateX(0);
   }
 
-  to {
-    transform: translate3d(-33.3333%, 0, 0);
+  100% {
+    transform: translateX(-33.3333%);
   }
 }
 
@@ -533,8 +534,10 @@ body {
 
 @media (max-width: 1024px) {
   .logo-item {
-    width: 175px;
-    min-width: 175px;
+    width: 190px;
+    min-width: 190px;
+    height: 80px;
+    padding: 0 14px;
   }
 }
 
@@ -544,19 +547,19 @@ body {
 
 @media (max-width: 768px) {
   .logo-track {
-    animation-duration: 14s;
+    animation-duration: 28s;
   }
 
   .logo-item {
-    width: 150px;
-    min-width: 150px;
-    height: 70px;
-    padding: 0 12px;
+    width: 155px;
+    min-width: 155px;
+    height: 64px;
+    padding: 0 10px;
   }
 
   .logo-slider::before,
   .logo-slider::after {
-    width: 45px;
+    width: 35px;
   }
 }
 
@@ -566,18 +569,19 @@ body {
 
 @media (max-width: 480px) {
   .logo-track {
-    animation-duration: 12s;
+    animation-duration: 24s;
   }
 
   .logo-item {
-    width: 135px;
-    min-width: 135px;
-    padding: 0 10px;
+    width: 140px;
+    min-width: 140px;
+    height: 56px;
+    padding: 0 8px;
   }
 
   .logo-slider::before,
   .logo-slider::after {
-    width: 30px;
+    width: 25px;
   }
 }
 
@@ -733,13 +737,17 @@ body {
   #sectors-stage>section {
     position: sticky;
     top: 0;
-    padding-top: clamp(4.5rem, 7vh, 5.5rem);
+    height: 100svh;
+    min-height: 0;
+    padding-top: clamp(5.75rem, 9.5vh, 7.5rem);
+    padding-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   #sectors-stage .grid.flex-1.items-center {
     align-items: center;
-    padding-top: clamp(2rem, 4vh, 3.5rem);
-    padding-bottom: clamp(2rem, 4vh, 3.5rem);
   }
 
   #sectors-stage h3 {
@@ -753,8 +761,11 @@ body {
     top: 0;
     height: 100svh;
     min-height: 0;
-    padding-top: clamp(5rem, 8vh, 6.5rem);
-    padding-bottom: 1.5rem;
+    padding-top: clamp(6.25rem, 10.5vh, 8.5rem);
+    padding-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
 
   #services-tabs {

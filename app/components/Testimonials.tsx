@@ -47,10 +47,9 @@ export default function Testimonials() {
 
   return (
     <section className="py-10">
-      {/* Retained full outer width */}
-      <div className="mx-auto w-full px-6">
-        <div className=" rounded-3xl px-6 md:px-10 py-12 md:py-16">
-          <Reveal className="relative mx-auto mb-12 text-center">
+      <div className="mx-auto w-full px-4 sm:px-6">
+        <div className="rounded-3xl px-2 sm:px-6 md:px-10 py-10 md:py-16">
+          <Reveal className="relative mx-auto mb-8 sm:mb-12 text-center">
             <div>
               <h2 className="text-3xl font-bold text-black md:text-5xl">
                 What Our{" "}
@@ -66,14 +65,14 @@ export default function Testimonials() {
             <div className="absolute right-0 top-1/2 hidden -translate-y-1/2 gap-3 sm:flex">
               <button
                 onClick={() => scroll(-1)}
-                className="w-10 h-10 rounded-full bg-white/80 hover:bg-brand-accent text-brand-navy hover:text-white flex items-center justify-center transition-colors shadow-sm"
+                className="w-10 h-10 rounded-full bg-white/80 hover:bg-brand-accent text-brand-navy hover:text-white flex items-center justify-center transition-colors shadow-sm cursor-pointer"
                 aria-label="Previous"
               >
                 <ChevronLeft size={18} />
               </button>
               <button
                 onClick={() => scroll(1)}
-                className="w-10 h-10 rounded-full bg-white/80 hover:bg-brand-accent text-brand-navy hover:text-white flex items-center justify-center transition-colors shadow-sm"
+                className="w-10 h-10 rounded-full bg-white/80 hover:bg-brand-accent text-brand-navy hover:text-white flex items-center justify-center transition-colors shadow-sm cursor-pointer"
                 aria-label="Next"
               >
                 <ChevronRight size={18} />
@@ -82,10 +81,10 @@ export default function Testimonials() {
           </Reveal>
 
           <Reveal>
-            {/* Center-aligned card container */}
+            {/* Desktop View (Horizontal expanding card) */}
             <div
               ref={scrollRef}
-              className="flex w-full items-center justify-start md:justify-center gap-5 overflow-x-auto scroll-smooth snap-x snap-mandatory pb-4 pt-2 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+              className="hidden md:flex w-full items-center justify-center gap-5 overflow-x-auto scroll-smooth pb-4 pt-2 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
             >
               {testimonials.map((t, i) => {
                 const isActive = i === activeIndex;
@@ -97,7 +96,7 @@ export default function Testimonials() {
                     onClick={() => setActiveIndex(activeIndex === i ? null : i)}
                     animate={{ width: isActive ? PHOTO_WIDTH + EXPANDED_TEXT_WIDTH : PHOTO_WIDTH }}
                     transition={{ type: "spring", stiffness: 260, damping: 28 }}
-                    className="snap-center shrink-0 rounded-2xl overflow-hidden bg-white/5 border border-white/10 cursor-pointer flex shadow-lg"
+                    className="shrink-0 rounded-2xl overflow-hidden bg-white border border-slate-200 cursor-pointer flex shadow-lg"
                     style={{ height: CARD_HEIGHT }}
                   >
                     {/* Photo — stays fixed width, always visible */}
@@ -122,7 +121,7 @@ export default function Testimonials() {
                           className="flex flex-col justify-center p-7 text-left bg-white"
                           style={{ width: EXPANDED_TEXT_WIDTH }}
                         >
-                          <Quote className="text-brand-navy mb-4" size={30} strokeWidth={1.5} />
+                          <Quote className="text-brand-accent mb-4" size={30} strokeWidth={1.5} />
                           <p className="text-black text-[15px] leading-relaxed mb-5">
                             {t.quote}
                           </p>
@@ -131,6 +130,65 @@ export default function Testimonials() {
                       )}
                     </AnimatePresence>
                   </motion.div>
+                );
+              })}
+            </div>
+
+            {/* Mobile View (Vertical card with Tap to Open review underneath) */}
+            <div className="flex md:hidden flex-col gap-4 w-full">
+              {testimonials.map((t, i) => {
+                const isActive = i === activeIndex;
+                return (
+                  <div
+                    key={t.name}
+                    onClick={() => setActiveIndex(isActive ? null : i)}
+                    className="w-full rounded-2xl overflow-hidden bg-white border border-slate-200 shadow-md transition-all duration-300 cursor-pointer"
+                  >
+                    {/* Photo Card on Top */}
+                    <div className="relative w-full h-[360px] sm:h-[400px]">
+                      <Image
+                        src={t.photo}
+                        alt={t.name}
+                        fill
+                        sizes="(max-width: 768px) 100vw, 320px"
+                        className="object-cover object-top"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-brand-navy/90 via-transparent to-transparent" />
+                      
+                      {/* Name bottom left */}
+                      <p className="absolute bottom-4 left-4 text-white font-bold text-base max-w-[65%] leading-snug drop-shadow-sm">
+                        {t.name}
+                      </p>
+
+                      {/* Tap to open pill badge bottom right */}
+                      <div className="absolute bottom-4 right-4">
+                        <span className="inline-flex items-center gap-1 px-3.5 py-1.5 rounded-full bg-brand-accent text-white text-xs font-semibold shadow-lg active:scale-95 transition-transform">
+                          {isActive ? "Close ▴" : "Read review ▾"}
+                        </span>
+                      </div>
+                    </div>
+
+                    {/* Review Section (Opens below photo on tap) */}
+                    <AnimatePresence>
+                      {isActive && (
+                        <motion.div
+                          initial={{ opacity: 0, height: 0 }}
+                          animate={{ opacity: 1, height: "auto" }}
+                          exit={{ opacity: 0, height: 0 }}
+                          transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+                          className="p-5 text-left bg-white border-t border-slate-100"
+                        >
+                          <Quote className="text-brand-accent mb-2.5" size={24} strokeWidth={1.5} />
+                          <p className="text-[#1E293B] text-sm leading-relaxed mb-4">
+                            {t.quote}
+                          </p>
+                          <p className="text-brand-navy font-bold text-xs uppercase tracking-wider">
+                            {t.name}
+                          </p>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
                 );
               })}
             </div>

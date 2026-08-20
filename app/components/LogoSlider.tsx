@@ -116,25 +116,31 @@ function LogoGroup() {
       {logos.map((logo, index) => (
         <div
           key={`${logo.name}-${index}`}
-          className="logo-item group flex items-center justify-center px-5"
+          className="logo-item group"
         >
-          <div className="flex h-16 sm:h-20 w-40 sm:w-44 items-center justify-center">
+          <div className="flex h-full w-full items-center justify-center p-1 sm:p-2 lg:p-3">
             <img
               src={logo.src}
               alt={logo.name}
               loading="lazy"
               decoding="async"
-              style={{
-                transform: `scale(${logo.scale ?? 1})`,
-              }}
               className="
-                max-h-14
-                sm:max-h-16
-                max-w-[160px]
+                max-h-9
+                sm:max-h-12
+                md:max-h-16
+                lg:max-h-20
+                xl:max-h-22
+                max-w-[110px]
+                sm:max-w-[135px]
+                md:max-w-[165px]
+                lg:max-w-[200px]
+                xl:max-w-[215px]
+                w-auto
+                h-auto
                 object-contain
                 transition-all
                 duration-300
-                opacity-90
+                opacity-85
                 hover:opacity-100
                 group-hover:-translate-y-1
               "
@@ -148,9 +154,9 @@ function LogoGroup() {
 
 export default function LogoSlider() {
   return (
-    <section className="w-full px-5 py-8 md:py-10 overflow-hidden">
+    <section className="w-full py-4 sm:py-8 md:py-12 overflow-hidden">
       <div className="w-full">
-        <div className="overflow-hidden py-6">
+        <div className="overflow-hidden py-2 sm:py-4 lg:py-6">
           <div className="logo-slider">
             <div className="logo-track">
               <LogoGroup />

@@ -464,17 +464,20 @@ export default function Home() {
 
               lg:min-h-[100svh]
               lg:px-8
-              lg:py-16
+              lg:pt-24
+              lg:pb-12
 
               xl:px-12
+              xl:pt-28
+              xl:pb-14
             "
           >
             {/* Ambient Background Glows */}
             <div className="pointer-events-none absolute -right-32 top-10 h-[480px] w-[480px] rounded-full bg-brand-accent/20 blur-[130px]" />
             <div className="pointer-events-none absolute -left-32 bottom-10 h-[480px] w-[480px] rounded-full bg-[#066BBD]/20 blur-[130px]" />
 
-            <Reveal className="mx-auto mb-6 max-w-2xl text-center sm:mb-10 lg:mb-12 relative z-10">
-              <p className="mb-2 text-xs font-mono font-bold uppercase tracking-[0.2em] text-[#60C7FF] sm:text-sm">
+            <Reveal className="mx-auto mb-4 max-w-2xl text-center sm:mb-6 lg:mb-8 relative z-10">
+              <p className="mb-1.5 text-xs font-mono font-bold uppercase tracking-[0.2em] text-[#60C7FF] sm:text-sm">
                 OUR SERVICES
               </p>
 
