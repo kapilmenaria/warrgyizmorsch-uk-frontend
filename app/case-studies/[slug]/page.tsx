@@ -43,7 +43,7 @@ export default async function CaseStudyDetailPage({
 
       <section className="mx-auto max-w-4xl px-6 py-16">
         <Reveal>
-          <p className="text-lg text-brand-navy/70 leading-relaxed mb-10">{study.detail}</p>
+          <p className="text-lg text-brand-navy/70 leading-relaxed mb-10">{study.summary}</p>
         </Reveal>
 
         <div className="grid sm:grid-cols-3 gap-4 mb-12">
