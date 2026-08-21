@@ -18,22 +18,6 @@ import Reveal from "../components/Reveal";
    COMPANY LEADERS
 ========================================================= */
 
-const leaders = [
-  {
-    name: "Mr. Mahipal Singh Rathore",
-    role: "CEO",
-    image: "/images/ceo.svg",
-    bio:
-      "Drives Warrgyizmorsch with sharp vision, strategy, and results. A natural strategist, he leads innovation, growth, and execution — staying ahead of trends and turning challenges into opportunities.",
-  },
-  {
-    name: "Mr. Yashpal Singh Rathore",
-    role: "COO",
-    image: "/images/coo.svg",
-    bio:
-      "Runs operations with precision and discipline. He turns plans into performance and teams into powerhouses, ensuring Warrgyizmorsch executes with speed and impact.",
-  },
-];
 
 /* =========================================================
    EXPERTISE
@@ -198,14 +182,10 @@ export default function AboutUsPage() {
           <Reveal className="delay-1">
             <h1 className="mt-6 max-w-5xl text-4xl font-bold leading-[1.08] tracking-tight text-black sm:text-5xl md:text-6xl lg:text-7xl">
 
-              We Build Digital Experiences {" "}
-
-              <span className="ml-2 bg-gradient-to-r from-brand-accent to-cyan-400 bg-clip-text italic text-transparent">
-
+              We Build Digital Experiences{" "}
+              <span className="bg-gradient-to-r from-brand-accent to-cyan-400 bg-clip-text text-transparent">
                 That Matter.
-
               </span>
-
             </h1>
           </Reveal>
 
@@ -595,15 +575,12 @@ export default function AboutUsPage() {
           <p className="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-brand-accent">
             Our Tech Stack
           </p>
-<h1 className="mt-6 max-w-5xl mx-auto text-5xl font-bold leading-[1.08] tracking-tight text-black ">
-
-              Technologies We {" "}
-
-              <span className="ml-2 bg-gradient-to-r from-brand-accent to-cyan-400 bg-clip-text italic text-transparent">
-
-               Work With
-
-              </span> </h1>
+          <h2 className="mt-6 max-w-5xl mx-auto text-4xl sm:text-5xl font-bold leading-[1.08] tracking-tight text-black">
+            Technologies We{" "}
+            <span className="bg-gradient-to-r from-brand-accent to-cyan-400 bg-clip-text text-transparent">
+              Work With
+            </span>
+          </h2>
           <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-black/75">
             A modern technology stack that allows us to build flexible,
             scalable, and high-performance digital products.
@@ -651,102 +628,7 @@ export default function AboutUsPage() {
 
       </section>
 
-      {/* =====================================================
-          LEADERS
-      ====================================================== */}
 
-      <section className="mx-auto max-w-7xl px-6 py-20 md:py-22">
-
-        <Reveal className="mb-12">
-
-          <p className="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-center text-brand-accent">
-            Experienced Leadership
-          </p>
-
-          <h1 className="mt-6  mx-auto text-5xl font-bold text-center leading-[1.08] tracking-tight text-black ">
-
-              Meet {" "}
-
-              <span className="ml-2 bg-gradient-to-r from-brand-accent to-cyan-400 bg-clip-text italic text-transparent">
-
-                Our Leaders
-
-              </span> </h1>
-          <p className="mt-5  text-base leading-7 text-center text-black/75">
-            The people guiding our vision, operations, innovation, and
-            continued growth.
-          </p>
-
-        </Reveal>
-
-        <div className="grid gap-8 md:grid-cols-2">
-
-          {leaders.map((leader, index) => (
-
-            <Reveal
-              key={leader.name}
-              className={`delay-${index + 1}`}
-            >
-
-              <div
-                className="
-                  group
-                  overflow-hidden
-                  rounded-3xl
-                  border
-                  border-black/5
-                  bg-white
-                  shadow-sm
-                  transition-all
-                  duration-500
-                  hover:-translate-y-2
-                  hover:shadow-2xl
-                  hover:shadow-brand-accent/10
-                "
-              >
-
-                <div className="relative h-72 overflow-hidden bg-brand-navy/[0.03]">
-
-                  <Image
-                    src={leader.image}
-                    alt={leader.name}
-                    fill
-                    className="
-                      object-cover
-                      transition-transform
-                      duration-700
-                      group-hover:scale-105
-                    "
-                  />
-
-                  <div className="absolute inset-0 bg-gradient-to-t from-brand-navy/30 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-
-                </div>
-
-                <div className="p-7">
-
-                  <p className="mb-2 text-xs font-bold uppercase tracking-[0.18em] text-brand-accent">
-                    {leader.role}
-                  </p>
-
-                  <h3 className="text-xl font-bold text-brand-navy">
-                    {leader.name}
-                  </h3>
-
-                  <p className="mt-4 text-sm leading-7 text-brand-navy/55">
-                    {leader.bio}
-                  </p>
-
-                </div>
-
-              </div>
-
-            </Reveal>
-          ))}
-
-        </div>
-
-      </section>
 
       {/* =====================================================
           JOURNEY CTA

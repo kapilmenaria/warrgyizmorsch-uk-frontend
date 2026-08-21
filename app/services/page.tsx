@@ -59,7 +59,7 @@ export default function ServicesPage() {
 
           <h1 className="mt-6 max-w-5xl text-4xl font-bold leading-[1.08] tracking-tight text-black sm:text-5xl md:text-6xl lg:text-7xl">
             Everything You Need To Build & Grow,{" "}
-            <span className="ml-2 bg-gradient-to-r from-brand-accent to-cyan-400 bg-clip-text italic text-transparent">
+            <span className="bg-gradient-to-r from-brand-accent to-cyan-400 bg-clip-text text-transparent">
               in One Place.
             </span>
           </h1>

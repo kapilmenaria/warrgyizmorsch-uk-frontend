@@ -9,7 +9,7 @@ import Testimonials from "./components/Testimonials";
 import OurWork from "./components/OurWork";
 import HomePageContactUs from "./components/HomePageContactUs";
 import HeroBackground from "./components/HeroBackground";
-
+import CaseStudyCard from "./components/CaseStudyCard";
 const processSteps = [
   {
     number: "01",
@@ -452,7 +452,7 @@ export default function Home() {
           className="
             relative isolate overflow-hidden
             flex w-full flex-col justify-center
-            bg-[#020B1E]
+            bg-[#050505]
             px-4
             py-10
 
@@ -504,6 +504,7 @@ export default function Home() {
       ========================================================= */}
       <Reveal>
         <Testimonials />
+        <CaseStudyCard />
       </Reveal>
 
       {/* =========================================================

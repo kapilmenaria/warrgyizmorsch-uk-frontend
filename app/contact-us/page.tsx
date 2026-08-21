@@ -46,13 +46,10 @@ export default function ContactUsPage() {
                 {/* Heading */}
 
                 <h1 className="text-4xl font-bold leading-[1.08] tracking-tight text-[#102A43] sm:text-5xl lg:text-6xl">
-
                   Let&apos;s Build Something{" "}
-
-                  <span className="bg-gradient-to-r from-brand-accent to-cyan-400 bg-clip-text italic text-transparent">
+                  <span className="bg-gradient-to-r from-brand-accent to-cyan-400 bg-clip-text text-transparent">
                     Great
                   </span>
-
                 </h1>
 
 
