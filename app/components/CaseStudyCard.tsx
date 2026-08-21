@@ -13,11 +13,11 @@ type CaseStudyCardProps = {
 };
 
 export default function CaseStudyCard({
-  slug,
-  client,
-  tags,
-  summary,
-  metrics,
+  slug = "",
+  client = "",
+  tags = [],
+  summary = "",
+  metrics = [],
   image,
 }: CaseStudyCardProps) {
   const [hover, setHover] = useState(false);

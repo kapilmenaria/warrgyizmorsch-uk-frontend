@@ -9,7 +9,6 @@ import Testimonials from "./components/Testimonials";
 import OurWork from "./components/OurWork";
 import HomePageContactUs from "./components/HomePageContactUs";
 import HeroBackground from "./components/HeroBackground";
-import CaseStudyCard from "./components/CaseStudyCard";
 const processSteps = [
   {
     number: "01",
@@ -504,10 +503,11 @@ export default function Home() {
       ========================================================= */}
       <Reveal>
         <Testimonials />
-        <CaseStudyCard />
       </Reveal>
 
-      {/* =========================================================
+
+
+      {/* ========================================================
           PROCESS
       ========================================================= */}
       <Reveal>

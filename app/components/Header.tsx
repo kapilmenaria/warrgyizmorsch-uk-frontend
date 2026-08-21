@@ -531,78 +531,7 @@ const aboutMenu: MenuItem[] = [
   },
 ];
 
-/* =========================================================
-   CAREER
-========================================================= */
 
-const careerMenu: MenuItem[] = [
-  {
-    id: "jobs",
-    label: "Current Openings",
-    description: "Find your next opportunity",
-    href: "/career",
-    icon: BriefcaseBusiness,
-    items: [
-      {
-        title: "Frontend Developer",
-        description: "React.js & Next.js",
-        href: "/career",
-        icon: Code2,
-      },
-      {
-        title: "Backend Developer",
-        description: "Laravel, Node.js & PHP",
-        href: "/career",
-        icon: Server,
-      },
-      {
-        title: "Full Stack Developer",
-        description: "Frontend + backend development",
-        href: "/career",
-        icon: Layers3,
-      },
-      {
-        title: "Digital Marketing",
-        description: "SEO & performance marketing",
-        href: "/career",
-        icon: Megaphone,
-      },
-      {
-        title: "UI/UX Designer",
-        description: "Creative product design",
-        href: "/career",
-        icon: PenTool,
-      },
-    ],
-  },
-  {
-    id: "culture",
-    label: "Life at Warrgyizmorsch",
-    description: "Grow with our team",
-    href: "/career",
-    icon: Users,
-    items: [
-      {
-        title: "Our Culture",
-        description: "How we work together",
-        href: "/career",
-        icon: Users,
-      },
-      {
-        title: "Learning & Growth",
-        description: "Build your skills with us",
-        href: "/career",
-        icon: Sparkles,
-      },
-      {
-        title: "Why Join Us?",
-        description: "Be part of something meaningful",
-        href: "/career",
-        icon: Target,
-      },
-    ],
-  },
-];
 
 /* =========================================================
    MEGA DROPDOWN
@@ -942,7 +871,6 @@ export default function Header() {
     "Case Studies": caseStudiesMenu,
     Blog: blogMenu,
     "About Us": aboutMenu,
-    Career: careerMenu,
   };
 
   const navLinks = [
