@@ -12,9 +12,20 @@ type Props = {
 export default function RotatingCaseStudiesCarousel({ items = caseStudies }: Props) {
   const [activePosition, setActivePosition] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
+  const [windowWidth, setWindowWidth] = useState(1200);
 
   const dragStart = useRef<number | null>(null);
   const pauseTimerRef = useRef<NodeJS.Timeout | null>(null);
+
+  /* -------------------------------------------------------
+     WINDOW RESIZE TRACKING FOR ACCURATE RESPONSIVE ARC
+  ------------------------------------------------------- */
+  useEffect(() => {
+    const handleResize = () => setWindowWidth(window.innerWidth);
+    handleResize();
+    window.addEventListener("resize", handleResize, { passive: true });
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   /* -------------------------------------------------------
      AUTO-SWIPE WITH 2-SECOND TIMER
@@ -74,6 +85,16 @@ export default function RotatingCaseStudiesCarousel({ items = caseStudies }: Pro
     setActivePosition((prev) => prev + diff);
   };
 
+  const isMobile = windowWidth < 640;
+  const isTablet = windowWidth >= 640 && windowWidth < 1024;
+
+  // Responsive spacing so both side cards peek in symmetrically on mobile
+  const spacing = isMobile
+    ? Math.min(270, Math.max(220, windowWidth * 0.70))
+    : isTablet
+    ? 320
+    : 370;
+
   return (
     <section
       id="rotating-stats"
@@ -124,14 +145,14 @@ export default function RotatingCaseStudiesCarousel({ items = caseStudies }: Pro
 
       {/* 3D Circular Viewport */}
       <div
-        className="relative left-1/2 h-[520px] sm:h-[560px] md:h-[590px] w-screen -translate-x-1/2 touch-pan-y select-none overflow-visible cursor-grab active:cursor-grabbing"
+        className="relative left-1/2 h-[500px] sm:h-[550px] md:h-[580px] w-screen -translate-x-1/2 touch-pan-y select-none overflow-visible cursor-grab active:cursor-grabbing"
         onPointerDown={handlePointerDown}
         onPointerUp={handlePointerUp}
       >
         <div
           className="absolute left-1/2 top-1/2 h-[500px] w-full -translate-x-1/2 -translate-y-1/2"
           style={{
-            perspective: "1800px",
+            perspective: isMobile ? "1400px" : "1800px",
             perspectiveOrigin: "50% 50%",
           }}
         >
@@ -142,26 +163,30 @@ export default function RotatingCaseStudiesCarousel({ items = caseStudies }: Pro
             while (relative > total / 2) relative -= total;
             while (relative < -total / 2) relative += total;
 
-            // Spacing to keep 3 cards side-by-side in front view
-            const spacing = 360;
+            // Only render visible cards in DOM to guarantee 60/120fps butter-smooth performance
+            if (Math.abs(relative) > 2.5) return null;
+
             const x = relative * spacing;
 
             let scale = 1;
             if (Math.abs(relative) >= 2) {
-              scale = 0.65;
+              scale = isMobile ? 0.62 : 0.68;
             } else if (Math.abs(relative) >= 1) {
-              scale = 0.88;
+              scale = isMobile ? 0.82 : 0.88;
             }
 
-            const depth = Math.max(-300, 100 - Math.abs(relative) * 160);
-            const rotateY = relative * -14;
-            const y = Math.min(30, Math.abs(relative) * 12);
+            const depth = isMobile
+              ? Math.max(-200, 50 - Math.abs(relative) * 120)
+              : Math.max(-260, 80 - Math.abs(relative) * 140);
+
+            const rotateY = relative * (isMobile ? -9 : -12);
+            const y = Math.min(20, Math.abs(relative) * 8);
 
             let opacity = 1;
-            if (Math.abs(relative) >= 3) {
-              opacity = 0;
-            } else if (Math.abs(relative) >= 2) {
-              opacity = 0.45;
+            if (Math.abs(relative) >= 2) {
+              opacity = isMobile ? 0.25 : 0.45;
+            } else if (Math.abs(relative) >= 1) {
+              opacity = isMobile ? 0.85 : 0.95;
             }
 
             const isFrontCard = Math.abs(relative) < 0.6;
@@ -172,21 +197,21 @@ export default function RotatingCaseStudiesCarousel({ items = caseStudies }: Pro
                 onClick={() => {
                   if (!isFrontCard) rotateToCard(index);
                 }}
-                className="absolute left-1/2 top-1/2 h-[460px] w-[310px] sm:h-[500px] sm:w-[350px] md:h-[530px] md:w-[375px]"
+                className="absolute left-1/2 top-1/2 h-[450px] w-[275px] sm:h-[490px] sm:w-[340px] md:h-[520px] md:w-[370px]"
                 style={{
-                  marginLeft: "-187px",
-                  marginTop: "-265px",
                   transform: `
-                    translate3d(${x}px, ${y}px, ${depth}px)
+                    translate3d(calc(-50% + ${x}px), calc(-50% + ${y}px), ${depth}px)
                     rotateY(${rotateY}deg)
                     scale(${scale})
                   `,
                   transformStyle: "preserve-3d",
+                  backfaceVisibility: "hidden",
+                  WebkitBackfaceVisibility: "hidden",
                   opacity,
                   zIndex: 100 - Math.round(Math.abs(relative) * 10),
-                  transition: "transform 650ms cubic-bezier(0.16, 1, 0.3, 1), opacity 450ms ease",
+                  transition: "transform 500ms cubic-bezier(0.22, 1, 0.36, 1), opacity 380ms ease",
                   pointerEvents: Math.abs(relative) <= 1 ? "auto" : "none",
-                  willChange: "transform",
+                  willChange: "transform, opacity",
                 }}
               >
                 <CaseStudySlab card={cs} isFront={isFrontCard} />
@@ -197,7 +222,7 @@ export default function RotatingCaseStudiesCarousel({ items = caseStudies }: Pro
       </div>
 
       {/* Bottom Dotted Progress Indicator */}
-      <div className="relative z-30 mt-4 flex items-center justify-center gap-2">
+      <div className="relative z-30 flex items-center justify-center gap-2">
         {items.map((_, i) => {
           let relative = i - activePosition;
           const total = items.length;
@@ -237,16 +262,20 @@ function CaseStudySlab({
     <div
       className={`
         group relative flex h-full w-full flex-col justify-between overflow-hidden rounded-[28px]
-        border border-white/15 bg-[#0b0b10] p-4 sm:p-5 backdrop-blur-2xl transition-all duration-500
-        ${isFront ? "ring-1 ring-white/25 shadow-[0_25px_70px_rgba(0,111,201,0.28)]" : "shadow-[0_20px_50px_rgba(0,0,0,0.8)]"}
+        border border-white/12 bg-[#0c0c12] p-4 sm:p-5 transition-all duration-500
+        ${isFront ? "ring-1 ring-white/25 shadow-[0_15px_40px_rgba(0,111,201,0.22)]" : "shadow-[0_10px_30px_rgba(0,0,0,0.6)]"}
       `}
+      style={{
+        backfaceVisibility: "hidden",
+        WebkitBackfaceVisibility: "hidden",
+      }}
     >
       {/* Ambient bottom color glow */}
       <div
         className={`
-          pointer-events-none absolute inset-x-0 bottom-0 h-40
-          bg-gradient-to-t ${card.glowColor || "from-blue-600/30 via-cyan-500/20 to-transparent"}
-          opacity-70 blur-2xl transition-opacity duration-500 group-hover:opacity-95
+          pointer-events-none absolute inset-x-0 bottom-0 h-36
+          bg-gradient-to-t ${card.glowColor || "from-blue-600/25 via-cyan-500/15 to-transparent"}
+          opacity-60 transition-opacity duration-300 group-hover:opacity-90
         `}
       />
 

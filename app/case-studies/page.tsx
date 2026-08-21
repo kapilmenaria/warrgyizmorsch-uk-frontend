@@ -10,7 +10,7 @@ export default function CaseStudiesPage() {
       {/* =====================================================
           HERO & 3D ROTATING CASE STUDIES CAROUSEL
       ====================================================== */}
-      <section className="relative overflow-hidden pt-16 sm:pt-20 lg:pt-24 pb-16 sm:pb-24">
+      <section className="relative overflow-hidden pt-16 sm:pt-20 lg:pt-24 pb-6 sm:pb-14">
         {/* Ambient background glows */}
         <div className="pointer-events-none absolute -left-40 top-10 h-[500px] w-[500px] rounded-full bg-brand-accent/15 blur-[140px]" />
         <div className="pointer-events-none absolute -right-40 top-40 h-[450px] w-[450px] rounded-full bg-[#1595E8]/10 blur-[140px]" />
@@ -96,7 +96,7 @@ export default function CaseStudiesPage() {
       {/* =====================================================
           BOTTOM CALL TO ACTION
       ====================================================== */}
-      <section className="relative border-t border-white/10 bg-gradient-to-b from-[#08080c] to-black py-16 sm:py-20">
+      <section className="relative border-t border-white/10 bg-gradient-to-b from-[#08080c] to-black py-8 sm:py-14">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
           <Reveal>
             <p className="text-xs font-mono font-bold uppercase tracking-[0.25em] text-[#60C7FF]">
