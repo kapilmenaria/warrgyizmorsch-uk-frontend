@@ -37,16 +37,7 @@ const logos: LogoItem[] = [
     src: "/images/Logo-slider-imgs/slider-comfort.webp",
     scale: 1.0,
   },
-  {
-    name: "Bharat",
-    src: "/images/Logo-slider-imgs/Bharat.png",
-    scale: 1.3,
-  },
-  {
-    name: "Democracy Asia",
-    src: "/images/Logo-slider-imgs/Democracy Asia.png",
-    scale: 1.2,
-  },
+
   {
     name: "Fantas",
     src: "/images/Logo-slider-imgs/Fantas.png",
@@ -62,11 +53,7 @@ const logos: LogoItem[] = [
     src: "/images/Logo-slider-imgs/Metronomi.png",
     scale: 1.25,
   },
-  {
-    name: "Mewar",
-    src: "/images/Logo-slider-imgs/Mewar.png",
-    scale: 1.25,
-  },
+
   {
     name: "Assignment",
     src: "/images/Logo-slider-imgs/assignment_logo.png",
