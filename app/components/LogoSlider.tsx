@@ -17,11 +17,7 @@ const logos: LogoItem[] = [
     src: "/images/Logo-slider-imgs/slider-aloe.webp",
     scale: 1.05,
   },
-  {
-    name: "Virazo",
-    src: "/images/Logo-slider-imgs/slider-virazo.webp",
-    scale: 1.0,
-  },
+
   {
     name: "London Street",
     src: "/images/Logo-slider-imgs/slider-londonstreet.webp",
@@ -61,18 +57,18 @@ const logos: LogoItem[] = [
   },
   {
     name: "Code Spare",
-    src: "/images/Logo-slider-imgs/code_spare_logo.webp",
+    src: "/images/Logo-slider-imgs/code_spare_logo.jpg",
     scale: 1.3,
   },
   {
     name: "ITMS",
-    src: "/images/Logo-slider-imgs/itms-logo.webp",
+    src: "/images/Logo-slider-imgs/itms-logo.jpg",
     scale: 1.4,
   },
 
   {
     name: "Nratie",
-    src: "/images/Logo-slider-imgs/nratie_logo.webp",
+    src: "/images/Logo-slider-imgs/nratie_logo.jpg",
     scale: 1.45,
   },
   {

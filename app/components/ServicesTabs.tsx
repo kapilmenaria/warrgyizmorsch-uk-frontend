@@ -105,6 +105,52 @@ const categories: Category[] = [
   },
 ];
 
+const categoryThemes: Record<
+  string,
+  {
+    bgGradient: string;
+    glowColor: string;
+    borderGlow: string;
+  }
+> = {
+  web: {
+    bgGradient:
+      "radial-gradient(ellipse 80% 70% at 50% 50%, rgba(0, 111, 201, 0.15) 0%, rgba(34, 211, 238, 0.05) 45%, transparent 75%)",
+    glowColor: "bg-[#006FC9]/25",
+    borderGlow: "border-[#006FC9]/20",
+  },
+  app: {
+    bgGradient:
+      "radial-gradient(ellipse 80% 70% at 50% 50%, rgba(34, 184, 255, 0.15) 0%, rgba(0, 111, 201, 0.05) 45%, transparent 75%)",
+    glowColor: "bg-[#22B8FF]/25",
+    borderGlow: "border-[#22B8FF]/20",
+  },
+  ai: {
+    bgGradient:
+      "radial-gradient(ellipse 80% 70% at 50% 50%, rgba(139, 92, 246, 0.16) 0%, rgba(192, 132, 252, 0.05) 45%, transparent 75%)",
+    glowColor: "bg-[#8B5CF6]/25",
+    borderGlow: "border-[#8B5CF6]/20",
+  },
+  software: {
+    bgGradient:
+      "radial-gradient(ellipse 80% 70% at 50% 50%, rgba(16, 185, 129, 0.15) 0%, rgba(52, 211, 153, 0.05) 45%, transparent 75%)",
+    glowColor: "bg-[#10B981]/25",
+    borderGlow: "border-[#10B981]/20",
+  },
+  marketing: {
+    bgGradient:
+      "radial-gradient(ellipse 80% 70% at 50% 50%, rgba(236, 72, 153, 0.15) 0%, rgba(251, 113, 133, 0.05) 45%, transparent 75%)",
+    glowColor: "bg-[#EC4899]/25",
+    borderGlow: "border-[#EC4899]/20",
+  },
+  ecommerce: {
+    bgGradient:
+      "radial-gradient(ellipse 80% 70% at 50% 50%, rgba(245, 158, 11, 0.15) 0%, rgba(251, 191, 36, 0.05) 45%, transparent 75%)",
+    glowColor: "bg-[#F59E0B]/25",
+    borderGlow: "border-[#F59E0B]/20",
+  },
+};
+
 /* =========================================================
    COMPONENT
 ========================================================= */
@@ -119,6 +165,7 @@ export default function ServicesTabs() {
   const touchStartY = useRef<number | null>(null);
 
   const activeCategory = categories[activeIndex];
+  const activeTheme = categoryThemes[activeCategory.id] || categoryThemes.web;
 
   const selectCategory = (index: number) => {
     const next = Math.max(0, Math.min(index, categories.length - 1));
@@ -234,32 +281,27 @@ export default function ServicesTabs() {
       {/* =====================================================
           3D SCENE (MOBILE: TOP / DESKTOP: RIGHT)
       ====================================================== */}
-      <div className="order-1 lg:order-2 lg:col-span-7">
+      <div className="order-1 lg:order-2 lg:col-span-7 relative flex items-center justify-center h-[250px] sm:h-[320px] lg:h-[480px] xl:h-[520px]">
+        {/* Seamless Ambient Accent Glow (Naturally diffused into section background, no box edges) */}
         <div
-          className="
-            animate-scene-in relative h-[250px] sm:h-[320px] lg:h-[480px] xl:h-[520px] overflow-hidden bg-transparent
-          "
-        >
-          {/* Ambient glow behind the scene */}
-          <div
-            className="
-              animate-pulse-glow pointer-events-none absolute left-1/2 top-1/2
-              h-[220px] w-[220px] sm:h-[300px] sm:w-[300px] -translate-x-1/2 -translate-y-1/2
-              rounded-full bg-brand-accent/15 blur-[80px] sm:blur-[90px]
-            "
-          />
+          className={`
+            pointer-events-none absolute left-1/2 top-1/2
+            h-[260px] w-[260px] sm:h-[380px] sm:w-[380px] lg:h-[440px] lg:w-[440px]
+            -translate-x-1/2 -translate-y-1/2 rounded-full ${activeTheme.glowColor}
+            blur-[100px] sm:blur-[130px] opacity-70 transition-colors duration-700 ease-out
+          `}
+        />
 
-          {/* Counter (Desktop Only) */}
-          <div className="absolute right-2 top-2 z-20 text-right sm:right-3 sm:top-3 hidden lg:block">
-            <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/60">
-              {String(activeIndex + 1).padStart(2, "0")} / 06
-            </span>
-          </div>
+        {/* Counter (Desktop Only) */}
+        <div className="absolute right-2 top-2 z-20 text-right sm:right-3 sm:top-3 hidden lg:block pointer-events-none">
+          <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/60">
+            {String(activeIndex + 1).padStart(2, "0")} / 06
+          </span>
+        </div>
 
-          {/* The 3D scene */}
-          <div className="absolute inset-0">
-            <SceneCanvas id={activeCategory.id} active={isSectionActive} />
-          </div>
+        {/* The 3D scene in the same container */}
+        <div className="relative h-full w-full">
+          <SceneCanvas id={activeCategory.id} active={isSectionActive} />
         </div>
       </div>
 
